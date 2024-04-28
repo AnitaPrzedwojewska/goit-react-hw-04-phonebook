@@ -1,4 +1,4 @@
-import { loadContacts } from "store/localStorage";
+import { loadContacts } from "../store/localStorage";
 
 const sampleContacts = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },

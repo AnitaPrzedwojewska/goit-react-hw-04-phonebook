@@ -1,25 +1,22 @@
-import { Contacts, Contact, ButtonStyled } from './contactList.styled';
+import css from './contactList.module.css';
 import PropTypes from 'prop-types';
 
-export const ContactList = ({ contacts, filter, onFilterChange, onDeleteContact }) => {
-  const filteredContacts = onFilterChange();
+export const ContactList = ({ contacts, onDeleteContact }) => {
   return (
-    <Contacts>
-      {filteredContacts.map(contact => (
-        <Contact key={contact.id}>
+    <ul className={css.Contacts}>
+      {contacts.map(contact => (
+        <li className={css.Contact} key={contact.id}>
           {contact.name}, {contact.number}
-          <ButtonStyled type="button" name={contact.id} onClick={onDeleteContact}>
+          <button className={css.ButtonStyled} type="button" name={contact.id} onClick={onDeleteContact}>
             Delete
-          </ButtonStyled>
-        </Contact>
+          </button>
+        </li>
       ))}
-    </Contacts>
+    </ul>
   );
 };
 
 ContactList.propTypes = {
-  contacts: PropTypes.array,
-  filter: PropTypes.string,
-  onFilterChange: PropTypes.func.isRequired,
+  contacts: PropTypes.arrayOf().isRequired,
   onDeleteContact: PropTypes.func.isRequired
 };

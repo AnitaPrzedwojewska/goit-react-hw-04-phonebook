@@ -1,11 +1,11 @@
-import { LOCAL_STORAGE_KEY } from "constants/local-storage-key";
+import { LOCAL_STORAGE_KEY } from "../constants/local-storage-key";
 
 const load = (key) => {
   try {
     const response = localStorage.getItem(key);
     return response === null ? undefined : JSON.parse(response);
   } catch (error) {
-    console.error('Get state error: ', error.message);
+    // console.error('Get state error: ', error.message);
     alert('Get state error: ', error.message);
   }
 }
@@ -15,7 +15,7 @@ const save = (key, value) => {
     const data = JSON.stringify(value);
     localStorage.setItem(key, data);
   } catch (error) {
-    console.error('Set state error: ', error.message);
+    // console.error('Set state error: ', error.message);
     alert('Set state error: ', error.message);
   }
 }

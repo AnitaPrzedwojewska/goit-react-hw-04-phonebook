@@ -1,35 +1,64 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import './App.css';
+import { INITIAL_STATE } from "./constants/initial-contacts-state";
+import { ContactForm } from "./components/ContactForm/contactForm";
+import { Filter } from "./components/Filter/filter";
+import { ContactList } from "./components/ContactList/contactList";
+import { saveContacts } from "./store/localStorage";
 
 function App() {
-  const [count, setCount] = useState(0)
+  console.log("Działam");
+
+  const [contacts, setContacts] = useState(INITIAL_STATE.contacts);
+  const [filter, setFilter] = useState(INITIAL_STATE.filter);
+
+  const changeFilter = (event) => {
+    const { value } = event.target;
+    setFilter({ filter: value });
+  };
+
+  const addContact = newContact => {
+    const existContact = contacts.find(
+      contact => contact.name === newContact.name
+    );
+
+    if (existContact) {
+      alert(`${newContact.name} is already in contacts!`);
+      return;
+    }
+    setContacts({ contacts: [...contacts, newContact] });
+  };
+
+  const filterContacts = () => {
+    return filter.trim() === ''
+      ? contacts
+      : contacts.filter(contact =>
+          contact.name.toLowerCase().includes(filter.toLowerCase())
+        );
+  };
+
+  const deleteContact = event => {
+    setContacts({
+      contacts: contacts.filter(contact => contact.id !== event.target.name),
+    });
+  }
+
+  useEffect(() => {
+    saveContacts(contacts);
+  }, [contacts, filter]);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Phonebook</h1>
+      <ContactForm onFormSubmit={addContact} />
+      <h2>Contacts</h2>
+      <Filter filter={filter} onFilterChange={changeFilter} />
+      <ContactList
+        contacts={filterContacts()}
+        onDeleteContact={deleteContact}
+      />
     </>
-  )
+  );
 }
 
 export default App

@@ -1,28 +1,26 @@
-import { Component } from 'react';
 import { nanoid } from 'nanoid';
-import { InputStyled } from './filter.styled';
+import css from './filter.module.css';
+import { PropTypes } from 'prop-types';
 
-export class Filter extends Component {
+export const Filter = ({ filter, onFilterChange }) => {
 
-  handleChange = (event) => {
-    this.props.onFilterChange(event);
-  }
+  const searchInputId = nanoid();
 
-  searchInputId = nanoid();
+  return (
+    <>
+      <p>Find contacts by name:</p>
+      <input
+        className={css.filterInput}
+        type='input'
+        name='filter'
+        id={searchInputId}
+        value={filter}
+        onChange={onFilterChange}></input>
+    </>
+  );
+};
 
-  render() {
-    const { filter } = this.props;
-    return (
-      <>
-        <p>Find contacts by name:</p>
-        <InputStyled
-          type="input"
-          name="filter"
-          id={this.searchInputId}
-          value={filter}
-          onChange={this.handleChange}
-        ></InputStyled>
-      </>
-    );
-  }
-}
+Filter.propTypes = {
+  filter: PropTypes.string.isRequired,
+  onFilterChange: PropTypes.func.isRequired
+};
