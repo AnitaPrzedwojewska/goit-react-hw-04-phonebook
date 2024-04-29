@@ -12,7 +12,7 @@ function App() {
 
   const changeFilter = (event) => {
     const { value } = event.target;
-    setFilter({ filter: value });
+    setFilter(value);
   };
 
   const addContact = newContact => {
@@ -25,7 +25,7 @@ function App() {
       alert(`${newContact.name} is already in contacts!`);
       return;
     }
-    setContacts({ contacts: [...contacts, newContact] });
+    setContacts([...contacts, newContact]);
   };
 
   const filteredContacts = () => {
@@ -37,9 +37,7 @@ function App() {
   };
 
   const deleteContact = (id) => {
-    setContacts({
-      contacts: contacts.filter(contact => contact.id !== id),
-    });
+    setContacts(contacts.filter(contact => contact.id !== id));
   }
 
   useEffect(() => {
