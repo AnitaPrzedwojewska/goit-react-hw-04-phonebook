@@ -1,5 +1,4 @@
 .Contacts {
-  width: 100%;
   padding: 20px 28px;
   display: flex;
   flex-direction: column;
@@ -14,8 +13,9 @@
   align-items: center;
 }
 
-.ButtonStyled {
+.DeleteButton {
   padding: 2px 5px;
   border-radius: 5px;
+  border: 1px solid grey;
   cursor: pointer;
 }

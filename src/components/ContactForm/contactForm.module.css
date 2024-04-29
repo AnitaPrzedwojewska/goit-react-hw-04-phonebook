@@ -1,7 +1,6 @@
-.FormStyled {
-  width: 100%;
+.newContactForm {
   padding: 20px 28px;
-  background-color: lightgray;
+  background-color: rgb(96, 96, 96);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -17,18 +16,19 @@
   width: 100%;
 }
 
-.LabelStyled {
+.FormLabel {
   padding: 2px 5px;
 }
 
-.InputStyled {
+.FormInput {
   width: 180px;
   padding: 2px 5px;
   border-radius: 5px;
 }
 
-.ButtonStyled {
+.formButton {
   padding: 2px 5px;
+  border: 1px solid gray;
   border-radius: 5px;
   cursor: pointer;
 }

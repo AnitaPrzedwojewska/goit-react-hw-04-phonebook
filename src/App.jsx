@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import { INITIAL_STATE } from "./constants/initial-contacts-state";
+import { INITIAL_CONTACTS, INITIAL_FILTER } from "./constants/initial-contacts-state";
 import { ContactForm } from "./components/ContactForm/contactForm";
 import { Filter } from "./components/Filter/filter";
 import { ContactList } from "./components/ContactList/contactList";
 import { saveContacts } from "./store/localStorage";
 
 function App() {
-  console.log("Działam");
-
-  const [contacts, setContacts] = useState(INITIAL_STATE.contacts);
-  const [filter, setFilter] = useState(INITIAL_STATE.filter);
+  const [contacts, setContacts] = useState(INITIAL_CONTACTS);
+  const [filter, setFilter] = useState(INITIAL_FILTER);
 
   const changeFilter = (event) => {
     const { value } = event.target;
@@ -18,6 +16,7 @@ function App() {
   };
 
   const addContact = newContact => {
+    console.log('addContact - newContact: ', newContact);
     const existContact = contacts.find(
       contact => contact.name === newContact.name
     );
@@ -29,7 +28,7 @@ function App() {
     setContacts({ contacts: [...contacts, newContact] });
   };
 
-  const filterContacts = () => {
+  const filteredContacts = () => {
     return filter.trim() === ''
       ? contacts
       : contacts.filter(contact =>
@@ -37,15 +36,18 @@ function App() {
         );
   };
 
-  const deleteContact = event => {
+  const deleteContact = (id) => {
     setContacts({
-      contacts: contacts.filter(contact => contact.id !== event.target.name),
+      contacts: contacts.filter(contact => contact.id !== id),
     });
   }
 
   useEffect(() => {
     saveContacts(contacts);
-  }, [contacts, filter]);
+  }, [contacts]);
+
+  console.log('App - contacts: ', contacts);
+  console.log('App - filter: ', filter);
 
   return (
     <>
@@ -54,7 +56,7 @@ function App() {
       <h2>Contacts</h2>
       <Filter filter={filter} onFilterChange={changeFilter} />
       <ContactList
-        contacts={filterContacts()}
+        contacts={filteredContacts()}
         onDeleteContact={deleteContact}
       />
     </>

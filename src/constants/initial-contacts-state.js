@@ -7,7 +7,6 @@ const sampleContacts = [
   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
 ];
 
-export const INITIAL_STATE = {
-  contacts: loadContacts() || sampleContacts,
-  filter: '',
-};
+export const INITIAL_CONTACTS = loadContacts() || sampleContacts;
+
+export const INITIAL_FILTER = '';
