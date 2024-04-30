@@ -19,3 +19,8 @@
   border: 1px solid grey;
   cursor: pointer;
 }
+
+.Info {
+  font-style: italic;
+  font-size: smaller;
+}

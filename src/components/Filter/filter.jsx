@@ -15,6 +15,7 @@ export const Filter = ({ filter, onFilterChange }) => {
         name='filter'
         id={searchInputId}
         value={filter}
+        placeholder='enter part of the name'
         onChange={onFilterChange}></input>
     </>
   );
