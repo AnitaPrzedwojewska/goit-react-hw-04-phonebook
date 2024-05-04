@@ -14,10 +14,11 @@
 }
 
 .DeleteButton {
-  padding: 2px 5px;
+  padding: .25em 1em;
   border-radius: 5px;
   border: 1px solid grey;
   cursor: pointer;
+  margin-left: 10px;
 }
 
 .Info {

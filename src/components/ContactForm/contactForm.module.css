@@ -1,6 +1,6 @@
 .newContactForm {
   padding: 20px 28px;
-  background-color: rgb(96, 96, 96);
+  background-color: lightgray;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
